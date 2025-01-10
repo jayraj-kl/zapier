@@ -16,6 +16,22 @@ app.post("/hooks/catch/:userId/:zapId", async (req, res) => {
         const run = await client.zapRun.create({ data: { zapId: zapId, metadata: body } });
         await client.zapRunOutbox.create({ data: { zapRunId: run.id } });
     })
+    /*
+    START TRANSACTION;
+
+    -- Insert into zapRun table and get the generated ID
+    INSERT INTO zapRun (zapId, metadata)
+    VALUES ('zapId_value', 'body_value');
+
+    -- Assuming `id` is the AUTO_INCREMENT primary key of zapRun
+    SET @runId = LAST_INSERT_ID();
+
+    -- Insert into zapRunOutbox using the generated ID
+    INSERT INTO zapRunOutbox (zapRunId)
+    VALUES (@runId);
+
+    COMMIT;
+    */
     res.json({ message: "Webhook received" });
 })
 
