@@ -9,6 +9,7 @@ import { SigninSchema, SignupSchema } from "../types";
 const router = Router();
 
 router.post("/signup", async (req, res) => {
+    console.log("/api/v1/user/signup is hit");
     const body = req.body;
     const parsedData = SignupSchema.safeParse(body);
 
@@ -28,6 +29,7 @@ router.post("/signup", async (req, res) => {
 })
 
 router.post("/signin", async (req, res) => {
+    console.log("/api/v1/user/signin is hit");
     const body = req.body;
     const parsedData = SigninSchema.safeParse(body);
 
@@ -46,6 +48,7 @@ router.post("/signin", async (req, res) => {
 })
 
 router.get("/", authMiddleware, async (req, res) => {
+    console.log("/api/v1/user/signup is hit");
     // TODO: Fix the type
     // @ts-ignore
     const id = req.id;
